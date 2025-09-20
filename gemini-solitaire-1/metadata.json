@@ -1,0 +1,5 @@
+
+{
+  "name": "Solitaire AI",
+  "description": "A classic Klondike Solitaire game built with React, TypeScript, and Pixi.js, featuring an AI-powered hint system using the Gemini API to suggest your next move."
+}
