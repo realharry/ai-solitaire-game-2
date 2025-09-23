@@ -1,4 +1,3 @@
-
 import { GoogleGenAI } from "@google/genai";
 
 const getSystemInstruction = () => `
@@ -26,10 +25,7 @@ Example moves:
 
 export const getHint = async (gameState: string, modelName: string): Promise<string> => {
     try {
-        if (!process.env.API_KEY) {
-            throw new Error("API key not found. Please set the API_KEY environment variable.");
-        }
-        
+        // FIX: Per coding guidelines, assume API_KEY is present and valid. Removed check for process.env.API_KEY.
         const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
         const prompt = `Here is the current game state:\n\n${gameState}\n\nWhat is the best move?`;
@@ -46,9 +42,7 @@ export const getHint = async (gameState: string, modelName: string): Promise<str
         return response.text;
     } catch (error) {
         console.error("Error fetching hint from Gemini API:", error);
-        if (error instanceof Error && error.message.includes('API key not valid')) {
-            return "Error: Invalid API Key. Please check your configuration.";
-        }
+        // FIX: Per coding guidelines, removed specific error message for invalid API key.
         return "Sorry, I couldn't get a hint right now. Please try again later.";
     }
 };

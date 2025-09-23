@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState } from 'react';
 import PhaserGame from './components/PhaserGame';
 import HintPanel from './components/HintPanel';
 import SettingsModal from './components/SettingsModal';
@@ -7,7 +7,6 @@ import StatsModal from './components/StatsModal';
 import { getHint } from './services/geminiService';
 
 const App: React.FC = () => {
-    const [gameState, setGameState] = useState<string>('');
     const [hint, setHint] = useState<string>('');
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [error, setError] = useState<string>('');
@@ -18,43 +17,28 @@ const App: React.FC = () => {
     const [cardBackUrl, setCardBackUrl] = useState<string>('https://i.imgur.com/DrCL3Sj.png');
     const [difficulty, setDifficulty] = useState<'draw1' | 'draw3'>('draw1');
 
-    const handleGameState = useCallback((event: Event) => {
-        const customEvent = event as CustomEvent<string>;
-        setGameState(customEvent.detail);
-    }, []);
-
-    useEffect(() => {
-        window.addEventListener('gameState', handleGameState);
-        return () => {
-            window.removeEventListener('gameState', handleGameState);
-        };
-    }, [handleGameState]);
-
-    useEffect(() => {
-        if (gameState) {
-            fetchHint();
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [gameState]);
-
-
-    const fetchHint = async () => {
-        if (!gameState) return;
+    const fetchHint = async (currentGameState: string) => {
+        if (!currentGameState) return;
         setIsLoading(true);
         setError('');
         setHint('');
         try {
-            const hintText = await getHint(gameState, aiModel);
+            const hintText = await getHint(currentGameState, aiModel);
             setHint(hintText);
         } catch (err) {
             setError(err instanceof Error ? err.message : 'An unknown error occurred.');
         } finally {
             setIsLoading(false);
-            setGameState(''); // Reset game state to allow fetching new hint for the same state if needed
         }
     };
 
     const handleGetHint = () => {
+        const onGameStateResponse = (event: Event) => {
+            const customEvent = event as CustomEvent<string>;
+            fetchHint(customEvent.detail);
+            window.removeEventListener('gameState', onGameStateResponse);
+        };
+        window.addEventListener('gameState', onGameStateResponse);
         window.dispatchEvent(new CustomEvent('getGameState'));
     };
 
