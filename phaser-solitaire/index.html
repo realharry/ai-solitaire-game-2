@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <title>AI Solitaire</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.min.js"></script>
+    <style>
+      :root {
+        --background: 222 47% 11%; /* slate-900 */
+        --foreground: 210 40% 98%; /* slate-50 */
+        --card: 222 47% 11%; /* slate-900 */
+        --card-foreground: 210 40% 98%; /* slate-50 */
+        --popover: 224 71% 4%; /* slate-950 */
+        --popover-foreground: 210 40% 98%; /* slate-50 */
+        --primary: 210 40% 98%; /* slate-50 */
+        --primary-foreground: 222 47% 11%; /* slate-900 */
+        --secondary: 217 33% 17%; /* slate-800 */
+        --secondary-foreground: 210 40% 98%; /* slate-50 */
+        --muted: 217 33% 17%; /* slate-800 */
+        --muted-foreground: 215 20% 65%; /* slate-400 */
+        --accent: 217 33% 17%; /* slate-800 */
+        --accent-foreground: 210 40% 98%; /* slate-50 */
+        --destructive: 0 63% 31%; /* red-700 */
+        --destructive-foreground: 210 40% 98%; /* slate-50 */
+        --border: 217 33% 17%; /* slate-800 */
+        --input: 217 33% 17%; /* slate-800 */
+        --ring: 215 28% 42%; /* slate-600 */
+        --radius: 0.5rem;
+      }
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: hsl(var(--background));
+        color: hsl(var(--foreground));
+        overflow: hidden;
+      }
+      #root {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/",
+    "react/": "https://aistudiocdn.com/react@^19.1.1/",
+    "react": "https://aistudiocdn.com/react@^19.1.1",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.20.0",
+    "phaser": "https://aistudiocdn.com/phaser@^3.90.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
