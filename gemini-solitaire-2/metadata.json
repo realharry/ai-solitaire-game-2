@@ -1,0 +1,5 @@
+
+{
+  "name": "Solitaire AI Assistant",
+  "description": "Play the classic game of Klondike Solitaire with an AI assistant powered by Gemini. Get hints, strategic advice, and race against the clock to solve the puzzle. Features a dynamic game board built with Pixi.js and a sleek UI."
+}
