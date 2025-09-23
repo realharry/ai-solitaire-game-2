@@ -3,7 +3,7 @@ import Phaser from 'phaser';
 import { GameScene } from '../phaser/scenes/GameScene';
 
 const GAME_WIDTH = 660;
-const GAME_HEIGHT = 800;
+const GAME_HEIGHT = 700;
 
 interface PhaserGameProps {
     cardBackUrl: string;
